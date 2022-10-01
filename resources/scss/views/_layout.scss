@@ -53,11 +53,20 @@
   flex-direction: column;
 }
 
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .sidebar-list__item {
+  display: flex;
+  gap:10px;
+  align-items: center;
   list-style-type: none;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  padding: 10px;
+  padding: 10px 20px;
   cursor: pointer;
 }
 
@@ -78,4 +87,16 @@
   border: none;
   color: white;
   font-size: 14px;
+}
+
+.svg-icon {
+  width: 1.2rem;
+
+  path {
+    fill: white;
+  }
+}
+
+.center-container {
+  padding: 1.5rem;
 }
