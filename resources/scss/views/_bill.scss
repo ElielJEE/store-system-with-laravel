@@ -1,0 +1,148 @@
+.bill-container {
+  width: 100%;
+}
+
+.page-title__container {
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bill-form__container {
+  margin-bottom: 10px;
+}
+
+.customer-form {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #13111D;
+  padding: 20px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 15px;
+  width: 50%;
+  gap: 10px;
+
+  h4 {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.btn-form__container {
+  width: auto;
+  display: flex;
+  gap: 15px;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+
+    svg {
+      width: 20px;
+
+      path {
+        fill: white;
+      }
+    }
+  }
+
+  button:hover {
+    text-decoration: underline;
+  }
+}
+
+.info-bill {
+  strong {
+    color: red;
+  }
+}
+
+.table-container {
+  width: 100%;
+  background-color: #13111D;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.table-container__header {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: solid white 1px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.bill-table {
+  width: 100%;
+
+  thead {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  tbody {
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+.footer-table__container {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.footer-content {
+  background-color: #13111D;
+  padding: 20px;
+  border-radius: 15px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+  }
+}
+
+.btn-save {
+  background-color: green;
+}
+
+.btn-delete {
+  background-color: red;
+}
+
+.total-bill {
+  color: green;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+
+  strong {
+    color: white;
+  }
+}

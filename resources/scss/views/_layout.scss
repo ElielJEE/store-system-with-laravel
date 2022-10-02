@@ -42,7 +42,7 @@
 
 .sidebar-container {
   display: flex;
-  width: 15%;
+  width: 20%;
   height: calc(100vh - 50px);
   background-color: #13111D;
 }
@@ -64,14 +64,22 @@
   gap:10px;
   align-items: center;
   list-style-type: none;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 10px 20px;
   cursor: pointer;
 }
 
 .sidebar-list__item:hover {
   background-color: #2c293f;
+}
+
+.list-item {
+  width: 100%;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .sidebar-content__btn {
@@ -99,4 +107,5 @@
 
 .center-container {
   padding: 1.5rem;
+  width: 100%;
 }
