@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +27,11 @@ Route::get('/', function () {
     return view('home.Index');
 });
 Route::resource('/bill', BillController::class);
+Route::resource('/products', ProductController::class);
+
+Route::group(['middleware' => ["auth:sanctum"]], function() {
+});
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
