@@ -4,6 +4,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CategorieController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,7 @@ Route::get('/', function () {
 });
 Route::resource('/bill', BillController::class);
 Route::resource('/products', ProductController::class);
+Route::resource('/categorie', CategorieController::class);
 
 Route::group(['middleware' => ["auth:sanctum"]], function() {
 });
