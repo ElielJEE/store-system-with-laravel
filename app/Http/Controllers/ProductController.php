@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductoRequest;
+use App\Models\product;
+use App\Models\Categorie;
+use Exception;
 
 class ProductController extends Controller
 {
@@ -13,7 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.Index');
+        $producto = product::paginate(15);
+        return view('products.Index',compact('producto'));
     }
 
     /**
@@ -23,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categorie::all();
+        return view('products.Create',compact('categories'));
     }
 
     /**
@@ -32,9 +37,21 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-        //
+        try {
+            $request->validated();
+            $product = new product();
+            $product ->nombre_producto = $request ->name;
+            $product ->precio_producto = $request ->price;
+            $product->fk_categories = $request -> categoria;
+            $product->save();
+            return redirect('/products/create')
+            ->withadd('Se creo el producto correctamente');
+        } catch (Exception $e) {
+            return redirect('/products/create')
+            ->witherrors('Ha ocurrido un error');
+        }
     }
 
     /**
@@ -43,9 +60,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(product $product)
     {
-        //
+        
     }
 
     /**
@@ -56,7 +73,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = product::find($id);
+        $categorias=Categorie::all();
+        $categorias=Categorie::find($product->fk_categories);
+        return view('products.Update',compact('product','categorias','categoria'));
     }
 
     /**
@@ -66,9 +86,21 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductoRequest $request,product $product)
     {
-        //
+        try {
+            $request->validated();
+            $product = new product();
+            $product ->nombre_producto = $request ->name;
+            $product ->precio_producto = $request ->price;
+            $product->fk_categories = $request -> categoria;
+            $product->save();
+            return redirect()->back()
+            ->withadd('Se edito correctamente el producto');
+        } catch (Exception $e) {
+            return redirect()->back()
+            ->witherrors('Ocurrio un error al editar el producto');
+        }
     }
 
     /**
@@ -77,8 +109,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(product $product)
     {
-        //
+        $product->delete();
+        return redirect('/products');
     }
 }

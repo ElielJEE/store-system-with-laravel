@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use Illuminate\Http\Request;
-use App\Http\Request\CategorieRequest;
+use App\Http\Requests\CategorieRequest;
 use Exception;
 
 class CategorieController extends Controller
@@ -16,8 +16,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categoria = Categorie::paginate(15);
-        return view('categories.Index',compact('categoria'));
+        $categories = Categorie::paginate(15);
+        return view('categories.Index',compact('categories'));
     }
 
     /**
@@ -36,17 +36,17 @@ class CategorieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategorieRequest $request)
     {
         try {
             $request->validated();
             $categoria = new Categorie();
             $categoria ->nombre_categoria = $request->name;
             $categoria->save();
-            return redirect()->route('categories.Create')
+            return redirect()->route('categorie.index')
             ->withAdd('Categoria Creada Exitosamente');
         } catch (Exception $e) {
-            return redirect()->route('categories.Create')
+            return redirect()->route('categorie.index')
             ->withErrors('Ha ocurrido un error');
         }
     }
@@ -68,9 +68,10 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit($id)
     {
-        
+        $categoria= Categorie::find($id);
+        return view('categories.Update',compact('categoria'));
     }
 
     /**
@@ -80,9 +81,21 @@ class CategorieController extends Controller
      * @param  \App\Models\Categorie  $categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(CategorieRequest $request, Categorie $categorie)
     {
-        //
+        try {
+            $request->validated();
+            $categorie->nombre_categoria = $request->name;
+            $categorie->save();
+
+            return redirect()->route('categorie.index')
+            ->withAdd('Categoria Actualizada Exitosamente');
+
+        } catch (Exception $e) {
+            
+            return redirect()->route('categorie.index')
+            ->withErrors('Ha ocurrido un error al editar la categoria');
+        }
     }
 
     /**
@@ -93,6 +106,7 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        //
+        $categorie->delete();
+        return redirect('/categorie');
     }
 }
