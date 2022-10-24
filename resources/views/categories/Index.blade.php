@@ -19,7 +19,9 @@
                 <table class="category-table">
                     <thead class="category-table__head">
                         <tr class="tr-categories">
-                            <th class="head-item">Fecha</th>
+                            <th class="head-item">Codigo</th>
+                            <th class="head-item">Fecha Creacion</th>
+                            <th class="head-item">Fecha Actualizacion</th>
                             <th class="head-item">Nombre</th>
                             <th class="head-item">Acciones</th>
                         </tr>
@@ -27,7 +29,9 @@
                     <tbody class="category-table__body">
                         @foreach ($categories as $category)
                             <tr class="tr-categories">
+                                <td>{{ $category->id }}</td>
                                 <td>{{ $category->created_at }}</td>
+                                <td>{{ $category->updated_at }}</td>
                                 <td>{{ $category->nombre_categoria }}</td>
                                 <td class="td-btn__categories">
                                     <a class="btn-edit" href="{{ route('categorie.edit', $category->id) }}">
