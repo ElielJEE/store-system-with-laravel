@@ -11,12 +11,13 @@
   <div class="login-container">
     <div class="login-container__center">
       <h1 class="login-tite">Iniciar sesion</h1>
-      <form action="" class="login-forms">
-        <label for="username" class="label label-user">Usuario:</label>
+      <form action="/login" method="POST" class="login-forms">
+        @csrf
+        <label for="name" class="label label-user">Usuario:</label>
         <input 
           type="text" 
           class="input username-input" 
-          name="username" 
+          name="name" 
           placeholder="Ingrese nombre de usuario"
           autocomplete="off"
         >

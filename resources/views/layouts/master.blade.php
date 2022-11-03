@@ -18,7 +18,10 @@
         </div>
         <div class="header-content__username-container">
           <span class="username">
-            @juan123
+            @auth()
+            @ {{auth()->user()->name}}
+              
+            @endauth
           </span>
         </div>
       </div>
@@ -61,9 +64,11 @@
             </ul>
           </div>
           <div class="sidebar-content__btn">
-            <button class="btn btn-logout">
-              <span class="btn-text">Cerrar sesion</span>
-            </button>
+            <a href="/logout">
+              <button class="btn btn-logout">
+                <span class="btn-text">Cerrar sesion</span>
+              </button>
+            </a>
           </div>
         </div>
       </aside>
