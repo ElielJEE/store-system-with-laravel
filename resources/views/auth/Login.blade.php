@@ -1,44 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
-  <title>LogIn</title>
-</head>
-<body>
-  <div class="login-container">
-    <div class="login-container__center">
-      <h1 class="login-tite">Iniciar sesion</h1>
-      <form action="/login" method="POST" class="login-forms">
-        @csrf
-        <label for="name" class="label label-user">Usuario:</label>
-        <input 
-          type="text" 
-          class="input username-input" 
-          name="name" 
-          placeholder="Ingrese nombre de usuario"
-          autocomplete="off"
-        >
-        <label for="password" class="label label-password">Contraseña:</label>
-        <input 
-          type="password" 
-          class="input password-input" 
-          name="password" 
-          placeholder="Ingrese contraseña"
-          autocomplete="off"
-        >
-        <button class="btn btn-login">
-          Inciar sesion
-        </button>
-        <a href="/register" class="btn-register__container">
-          <button type="button" class="btn btn-register">
-            Registrarse
-          </button>
-        </a>
-      </form>
-    </div>
+@extends('layouts.app')
+
+@section('content')
+<div class="login-container">
+  <div class="login-container__center">
+    <h1>{{ __('Iniciar sesion') }}</h1>
+    <form method="POST" action="{{ route('login') }}" class="login-forms">
+      @csrf
+      <label for="email" class="label">{{ __('Correo electronico') }}</label>
+      <input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email"
+        value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+      @error('email')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+      @enderror
+      <label for="password" class="label">{{ __('Contrasenia') }}</label>
+      <input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password"
+        required autocomplete="current-password">
+
+      @error('password')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+      @enderror
+      <button type="submit" class="btn btn-login">
+        {{ __('Iniciar Sesion') }}
+      </button>
+    </form>
+    <a href="{{route('register')}}" class="btn-register__container">
+      <button class="btn">Registrarse</button>  
+    </a>
   </div>
-</body>
-</html>
+</div>
+@endsection

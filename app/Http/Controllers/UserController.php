@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bill;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BillController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        return view('Bill.Index');
+        //
     }
 
     /**
@@ -41,10 +43,10 @@ class BillController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bill  $bill
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Bill $bill)
+    public function show($id)
     {
         //
     }
@@ -52,10 +54,10 @@ class BillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bill  $bill
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bill $bill)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +66,10 @@ class BillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bill  $bill
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bill $bill)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +77,10 @@ class BillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bill  $bill
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bill $bill)
+    public function destroy($id)
     {
         //
     }
