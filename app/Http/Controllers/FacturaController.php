@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FacturaRequest;
 use App\Models\Factura;
 use App\Models\Customer;
 use App\Models\Factura_Detalle;
@@ -34,7 +35,7 @@ class FacturaController extends Controller
     public function create()
     {
         $productos = product::all();
-        return view('Bill.create',compact('productos'));
+        return view('Bill.Create', compact('productos'));
     }
 
     /**
@@ -48,7 +49,7 @@ class FacturaController extends Controller
         try {
             $request->validated();
             $client = new Customer();
-            $client->nombre_cliente=$request->cliente;
+            $client->nombre_cliente=$request->customer_name;
             $client->save();
 
             $factura = new Factura();
@@ -57,11 +58,34 @@ class FacturaController extends Controller
             $factura->total_factura=session('total');
             $factura->save();
 
-            
+            foreach (session('productos') as $producto) {
+                $detalleFactura = new Factura_Detalle();
+                $detalleFactura->fk_factura = $factura->id;
+                $detalleFactura->fk_producto = $producto[0]->id;
+                $detalleFactura->cantidad = $producto["cantidad"];
+                $detalleFactura->save();
+            }
 
-        } catch (\Throwable $th) {
-            //throw $th;
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('factura.reports', ['factura' => $factura, 'productos' => session('productos'), 'cliente' => $client, 'total' => session('total')]);
+
+            session(['data' => array('productos' => session('productos'), 'cliente' => $client, 'total' => session('total'), 'factura' => $factura)]);
+
+            session(['total' => null]);
+            session(['productos' => null]);
+
+            return redirect()->route('facturation.create')->withSuccess('Facturacion Exitosa');
+
+        } catch (Exception $e) {
+            return redirect()->route('facturation.create')->withErrors("Ha ocurrido un error al finilizar la factura");
         }
+    }
+
+    public function generateReport() {
+        $data = session('data');
+        $pdf = app::make('dompdf.wrapper');
+        $pdf->loadView('facturas.reports', ['productos' => $data['productos'], 'factura' => $data['factura']]);
+        return $pdf->stream();
     }
 
     /**

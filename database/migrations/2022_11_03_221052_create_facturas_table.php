@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('fk_cliente');
+            $table->date('fecha_factura');
+            $table->double('total_factura');
+
+            $table->foreign('fk_cliente')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
         });
     }

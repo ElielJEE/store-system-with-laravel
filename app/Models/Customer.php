@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
+    public function customers() {
+        return $this->hasMany('App\Models\Factura');
+    }
 }

@@ -13,7 +13,7 @@ class FacturaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class FacturaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'customer_name'=>['required', 'max:255', 'min:3'],
+            'date'=>['required', 'max:255', 'min:3']
         ];
     }
 }

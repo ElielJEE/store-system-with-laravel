@@ -85,10 +85,16 @@
 
 .table-container__header {
   display: flex;
+  align-items: center;
+  gap: 10px;
   justify-content: flex-end;
   border-bottom: solid white 1px;
   padding-bottom: 10px;
   margin-bottom: 5px;
+
+  & select {
+    width: 150px;
+  }
 }
 
 .bill-table {
@@ -121,20 +127,16 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-
-  button {
-    border: none;
-    color: white;
-    font-size: 1.1rem;
-  }
 }
 
 .btn-save {
   background-color: green;
+  color: white;
 }
 
 .btn-delete {
   background-color: red;
+  color: white;
 }
 
 .total-bill {
@@ -145,4 +147,17 @@
   strong {
     color: white;
   }
+}
+
+.btn-delete__product {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-delete__product:hover {
+  text-decoration: underline;
 }

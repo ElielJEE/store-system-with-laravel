@@ -9,8 +9,8 @@ class FacturacionController extends Controller
 {
     public function gettotal(){
         $total=0;
-        foreach ($this->getproducts() as $producto => $value) {
-            $total +=$producto["cantidad"]*$producto[0]->precio_producto;
+        foreach ($this->getproducts() as $producto) {
+            $total += $producto["cantidad"] * $producto[0]->precio_producto;
         }
         return $total;
     }
@@ -32,7 +32,7 @@ class FacturacionController extends Controller
 
         $cantidad = $request->cant;
         $codigo = $request->producto;
-        $producto=[Producto::where("id","=",$codigo)->first(),'cantidad'=>$cantidad];
+        $producto=[Product::where("id","=",$codigo)->first(),'cantidad'=>$cantidad];
         
         if (!$producto) {
             return redirect()
@@ -43,7 +43,7 @@ class FacturacionController extends Controller
         $productos = $this->getproducts();
         $posibleindice = $this->buscarindicedeproducto($producto[0]->id,$productos);
 
-        if ($posibleindice===-1) {
+        if ($posibleindice === -1) {
             array_push($productos,$producto);
         }
         else {
@@ -51,25 +51,38 @@ class FacturacionController extends Controller
         }
         session(["productos"=>$productos,]);
         $this->updatetotal();
-        return redirect("facturacion/create");
+        return redirect("facturation/create");
     }
-    private function updatetotal(){
+
+		private function buscarIndiceDeProducto($codigo, $productos) {
+			foreach ($productos as $i => $producto) {
+				if($producto[0]->id === $codigo) {
+					return $i;
+				}
+			}
+			return -1;
+		}
+
+    private function updatetotal() {
         $total = $this->gettotal();
+				session(['total' => $total,]);
     }
-    private function deleteproducttovent(Request $request){
+
+    public function deleteProductToVent(Request $request){
         $indice=$request->indice;
         $productos= $this->getproducts();
         array_splice($productos,$indice,1);
         session(["productos"=>$productos,]);
         $this->updatetotal();
 
-        return redirect("facturacion/create");
+        return redirect("facturation/create");
     }
+
     public function cancelarventa(){
         session(["total"=>null,]);
         session(["productos"=>null,]);
         
-        return redirect("facturacion/create");
+        return redirect("facturation/create");
     }
 
     public function view(){

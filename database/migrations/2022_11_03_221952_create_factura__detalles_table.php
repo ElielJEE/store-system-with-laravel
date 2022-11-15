@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('factura__detalles', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('fk_factura');
+            $table->unsignedBigInteger('fk_producto');
+            $table->integer('cantidad');
+
+            $table->foreign('fk_factura')->references('id')->on('facturas')->onDelete('cascade');
+            
+            $table->foreign('fk_producto')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

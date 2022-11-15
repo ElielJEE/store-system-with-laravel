@@ -27,7 +27,14 @@ Route::resource('/register', RegisterController::class); */
 
 Auth::routes();
 
-Route::resource('/bill', FacturaController::class);
+Route::resource('/facturation', FacturaController::class);
+
+Route::post('/facturation/add/product', [App\Http\Controllers\FacturacionController::class, 'addProductToVent'])->name('addProduct');
+
+Route::delete('/facturation/cancel/vent', [App\Http\Controllers\FacturacionController::class, 'cancelVent'])->name('cancelVent');
+
+Route::delete('/facturation/product/delete', [App\Http\Controllers\FacturacionController::class, 'deleteProductToVent'])->name('deleteProductToVent');
+
 Route::resource('/products', ProductController::class);
 Route::resource('/categorie', CategorieController::class);
 
