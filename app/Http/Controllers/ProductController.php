@@ -51,10 +51,10 @@ class ProductController extends Controller
             $product ->precio_producto = $request ->price;
             $product->fk_categories = $request -> categoria;
             $product->save();
-            return redirect()->route('products.index')
+            return redirect()->route('products.create')
             ->withadd('Se creo el producto correctamente');
         } catch (Exception $e) {
-            return redirect()->route('products.index')
+            return redirect()->route('products.create')
             ->witherrors('Ha ocurrido un error');
         }
     }
@@ -99,7 +99,7 @@ class ProductController extends Controller
             $product ->precio_producto = $request ->price;
             $product->fk_categories = $request -> categoria;
             $product->save();
-            return redirect()->route('products.index')
+            return redirect()->back()
             ->withadd('Se edito correctamente el producto');
         } catch (Exception $e) {
             return redirect()->back()

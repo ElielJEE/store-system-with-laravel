@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,14 @@ Route::delete('/facturation/cancel/vent', [App\Http\Controllers\FacturacionContr
 
 Route::delete('/facturation/product/delete', [App\Http\Controllers\FacturacionController::class, 'deleteProductToVent'])->name('deleteProductToVent');
 
+Route::get('/factura', [App\Http\Controllers\FacturacionController::class, 'view'])->name('factura');
+
+Route::get('/factura/generateReport', [App\Http\Controllers\FacturaController::class, 'generateReport'])->name('generateReport');
+
 Route::resource('/products', ProductController::class);
 Route::resource('/categorie', CategorieController::class);
+Route::resource('/customers', CustomerController::class);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -47,10 +47,10 @@ class CategorieController extends Controller
             $categoria = new Categorie();
             $categoria ->nombre_categoria = $request->name;
             $categoria->save();
-            return redirect()->route('categorie.index')
+            return redirect()->route('categorie.create')
             ->withAdd('Categoria Creada Exitosamente');
         } catch (Exception $e) {
-            return redirect()->route('categorie.index')
+            return redirect()->route('categorie.create')
             ->withErrors('Ha ocurrido un error');
         }
     }
@@ -92,12 +92,11 @@ class CategorieController extends Controller
             $categorie->nombre_categoria = $request->name;
             $categorie->save();
 
-            return redirect()->route('categorie.index')
+            return redirect()->back()
             ->withAdd('Categoria Actualizada Exitosamente');
 
         } catch (Exception $e) {
-            
-            return redirect()->route('categorie.index')
+            return redirect()->back()
             ->withErrors('Ha ocurrido un error al editar la categoria');
         }
     }

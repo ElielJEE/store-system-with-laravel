@@ -67,12 +67,12 @@ class FacturaController extends Controller
             }
 
             $pdf = App::make('dompdf.wrapper');
-            $pdf->loadView('factura.reports', ['factura' => $factura, 'productos' => session('productos'), 'cliente' => $client, 'total' => session('total')]);
+            $pdf->loadView('Bill.Report', ['factura' => $factura, 'productos' => session('productos'), 'cliente' => $client, 'total' => session('total')]);
 
             session(['data' => array('productos' => session('productos'), 'cliente' => $client, 'total' => session('total'), 'factura' => $factura)]);
 
-            session(['total' => null]);
-            session(['productos' => null]);
+            session(['total' => null,]);
+            session(['productos' => null,]);
 
             return redirect()->route('facturation.create')->withSuccess('Facturacion Exitosa');
 
@@ -84,7 +84,7 @@ class FacturaController extends Controller
     public function generateReport() {
         $data = session('data');
         $pdf = app::make('dompdf.wrapper');
-        $pdf->loadView('facturas.reports', ['productos' => $data['productos'], 'factura' => $data['factura']]);
+        $pdf->loadView('Bill.Report', ['productos' => $data["productos"], 'cliente' => $data["cliente"], 'total' => $data["total"], 'factura' => $data["factura"]]);
         return $pdf->stream();
     }
 

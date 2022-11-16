@@ -7,6 +7,7 @@
 	</div>
 	<div class="bill-content">
 		<div class="bill-form__container">
+			
 			<form action="{{route('facturation.store')}}" class="customer-form" method="POST">
 				@csrf
 				<div class="form-container">
@@ -14,9 +15,10 @@
 					<div class="form-content">
 						<label for="customer_name" class="label customer-name">Cliente:</label>
 						<input type="text" class="input customer-input" name="customer_name"
-							placeholder="Ingrese nombre del cliente" autocomplete="off"
-							value="{{old('customer_name')}}"
-							>
+							placeholder="Ingrese nombre del cliente" autocomplete="off" value="{{old('customer_name')}}">
+						@error('client')
+						<span>{{$message}}</span>
+						@enderror
 					</div>
 				</div>
 				<div class="form-container">
@@ -32,6 +34,15 @@
 					</button>
 				</div>
 			</form>
+			<div class="form-container">
+				<form action="{{route('cancelVent')}}" method="POST">
+					@method('delete')
+					@csrf
+					<button class="btn btn-delete">
+						Eliminar factura
+					</button>
+				</form>
+			</div>
 		</div>
 		<div class="table-container">
 			<form class="table-container__header" action="{{route('addProduct')}}" method="post">
@@ -99,5 +110,6 @@
 		</div>
 		@endif
 	</div>
+	@include('components.Error')
 </div>
 @endsection

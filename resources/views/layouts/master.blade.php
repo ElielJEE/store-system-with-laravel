@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Store System</title>
   @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -15,7 +15,7 @@
       <div class="header-content">
         <div class="header-content__title">
           <h1 class="header-title">
-            Ventas
+            Variedades Lacrimosa
           </h1>
         </div>
         <div class="header-content__username-container">
@@ -33,7 +33,7 @@
           <div class="sidebar-content__list">
             <ul class="sidebar-list">
               <li class="sidebar-list__item">
-                <a href="/" class="list-item">
+                <a href="/home" class="list-item">
                   <svg class="svg-icon home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                     <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                     <path
@@ -73,7 +73,7 @@
                 </a>
               </li>
               <li class="sidebar-list__item">
-                <a href="/customer" class="list-item">
+                <a href="/customers" class="list-item">
                   <svg class="svg-icon customers-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                     <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                     <path

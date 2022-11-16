@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\product;
+use App\Models\Factura;
+use App\Models\Customer;
+use App\Models\Factura_Detalle;
 
 class FacturacionController extends Controller
 {
@@ -78,7 +81,7 @@ class FacturacionController extends Controller
         return redirect("facturation/create");
     }
 
-    public function cancelarventa(){
+    public function cancelVent(){
         session(["total"=>null,]);
         session(["productos"=>null,]);
         
@@ -86,7 +89,13 @@ class FacturacionController extends Controller
     }
 
     public function view(){
-        return view('Bill.reports');
+				/* $productos = product::all();
+				$cliente = Customer::all();
+				$factura = Factura::all();
+				$total = Factura_Detalle::all();
+        return view('Bill.Report', compact('productos', 'cliente', 'factura', 'total')); */
+
+				return view('Bill.Report');
     }
 }
 
